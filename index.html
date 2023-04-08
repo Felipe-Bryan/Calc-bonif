@@ -87,7 +87,28 @@
         </div>
       </div>
       <div class="row">
-        <button type="button" class="btn btn-primary" onclick="reset()">Nova Simulação</button>
+        <button type="button" class="btn btn-primary mb-3" onclick="reset()">Nova Simulação</button>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="input-group mb-3">
+            <span class="input-group-text w-50">Valor de venda</span>
+            <input
+              type="text"
+              class="form-control"
+              id="vVenda"
+              onblur="setVVendaTxt()"
+              onchange="setVVenda(), setMarkup()" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="input-group mb-3">
+            <span class="input-group-text w-50">Mark up</span>
+            <input type="text" class="form-control" id="markup" disabled />
+          </div>
+        </div>
       </div>
     </div>
     <script
@@ -111,6 +132,10 @@
       let vFinalTotalValue;
       const vFinalItem = document.getElementById('vFinalItem');
       let vFinalItemValue;
+      const vVenda = document.getElementById('vVenda');
+      let vVendaValue;
+      const markup = document.getElementById('markup');
+      let markupValue;
 
       function setVInicial() {
         vInicialValue = Number(vInicial.value);
@@ -147,6 +172,16 @@
       }
       function setVItemBonifTxt() {
         vItemBonif.value = `R$ ${vItemBonifValue.toFixed(2)}`;
+      }
+      function setVVenda() {
+        vVendaValue = Number(vVenda.value);
+      }
+      function setMarkup() {
+        markupValue = (vVendaValue / vFinalItemValue - 1) * 100;
+        markup.value = `${markupValue.toFixed(1)} %`;
+      }
+      function setVVendaTxt() {
+        vVenda.value = `R$ ${vVendaValue.toFixed(2)}`;
       }
       function reset() {
         location.reload();
